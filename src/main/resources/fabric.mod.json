@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
-  "id": "examplemod",
+  "id": "betterwithweed",
   "version": "${version}",
 
-  "name": "Example Mod",
-  "description": "This mod aims to help new BTA modders.",
+  "name": "Better With Weed",
+  "description": "This mod adds weed to BTA.",
   "authors": [
-    "Turnip Labs"
+    "Apollointhehouse"
   ],
   "contact": {
     "homepage": "",
@@ -20,12 +20,12 @@
     "main": [
       {
         "adapter": "kotlin",
-        "value": "turniplabs.examplemod.ExampleMod"
+        "value": "apollointhehouse.betterwithweed.BetterWithWeed"
       }
     ]
   },
   "mixins": [
-    "examplemod.mixins.json"
+    "betterwithweed.mixins.json"
   ],
 
   "depends": {
