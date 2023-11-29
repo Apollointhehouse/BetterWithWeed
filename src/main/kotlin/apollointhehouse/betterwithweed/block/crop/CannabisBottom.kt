@@ -61,7 +61,7 @@ class CannabisBottom(key: String, id: Int): BlockCrops(key, id) {
 		if (rand.nextInt((100.0f / growthRate).toInt()) != 0) return
 
 		world.setBlockAndMetadataWithNotify(x, y, z, id, meta + 1)
-		if (meta + 1 >= 1) world.setBlockAndMetadataWithNotify(x, y + 1, z, cannabisTopID, meta)
+		world.setBlockAndMetadataWithNotify(x, y + 1, z, cannabisTopID, meta)
 	}
 
 	override fun canBlockStay(world: World, x: Int, y: Int, z: Int): Boolean {
