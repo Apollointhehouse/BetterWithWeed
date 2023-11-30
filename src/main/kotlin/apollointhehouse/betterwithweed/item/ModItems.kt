@@ -12,7 +12,7 @@ object ModItems {
 
 	val cannabisSeeds: Item = ItemHelper.createItem(
 		BetterWithWeed.MOD_ID,
-		CannabisSeeds("crop.cannabis.bottom", cfg.getItemID("CannabisSeeds")),
+		CannabisSeeds("crop.cannabis.bottom", cfg.getItemID("CannabisCropSeeds")),
 		"crop.cannabis.seeds",
 		"cannabis_seeds.png"
 	)

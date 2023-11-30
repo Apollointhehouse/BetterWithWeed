@@ -19,14 +19,14 @@ object ModBlocks {
 		.setBlockModel(BlockModelRenderBlocks(1))
 		.setTags(BlockTags.NOT_IN_CREATIVE_MENU)
 		.setTickOnLoad()
-		.build(CannabisTop("crop.cannabis.top", cfg.getBlockID("CannabisTop")))
+		.build(CannabisTop("crop.cannabis.top", cfg.getBlockID("CannabisCropTop")))
 
 	val cannabisBottom: Block = BlockBuilder(BetterWithWeed.MOD_ID)
 		.setBlockSound(BlockSounds.GRASS)
 		.setBlockModel(BlockModelRenderBlocks(1))
 		.setTags(BlockTags.NOT_IN_CREATIVE_MENU)
 		.setTickOnLoad()
-		.build(CannabisBottom("crop.cannabis.bottom", cfg.getBlockID("CannabisBottom")))
+		.build(CannabisBottom("crop.cannabis.bottom", cfg.getBlockID("CannabisCropBottom")))
 
 	fun register() {
 	}

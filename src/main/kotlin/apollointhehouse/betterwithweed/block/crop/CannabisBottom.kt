@@ -2,9 +2,9 @@ package apollointhehouse.betterwithweed.block.crop
 
 import apollointhehouse.betterwithweed.BetterWithWeed
 import apollointhehouse.betterwithweed.Config
-import apollointhehouse.betterwithweed.Config.getGrowthRate
 import apollointhehouse.betterwithweed.block.ModBlocks
 import apollointhehouse.betterwithweed.item.ModItems
+import net.minecraft.core.block.Block
 import net.minecraft.core.block.BlockCrops
 import net.minecraft.core.block.entity.TileEntity
 import net.minecraft.core.enums.EnumDropCause
@@ -17,12 +17,13 @@ import net.minecraft.core.world.season.SeasonSummer
 import net.minecraft.core.world.season.SeasonWinter
 import turniplabs.halplibe.helper.TextureHelper
 import java.util.*
+import kotlin.math.absoluteValue
 
 class CannabisBottom(key: String, id: Int): BlockCrops(key, id) {
 	private val modID = BetterWithWeed.MOD_ID
 	private val cannabisTopID = ModBlocks.cannabisTop.id
 	private val stages = (0..4).map {
-		TextureHelper.getOrCreateBlockTexture(modID, "cannabis_stage${it}_bottom.png")
+		TextureHelper.getOrCreateBlockTexture(modID, "cannabis_bottom/stage${it}.png")
 	}
 	private val textureByStage = stages.map {
 		texCoordToIndex(it[0], it[1])
@@ -33,9 +34,27 @@ class CannabisBottom(key: String, id: Int): BlockCrops(key, id) {
 		setBlockBounds(0.3125f, 0.0f, 0.3125f, 0.6875f, 1.0f, 0.6875f)
 	}
 
-	private fun getGrowthRate(world: World): Float {
-		var f = Config.cfg.getGrowthRate("Cannabis")
+	private fun getGrowthRate(world: World, x: Int, y: Int, z: Int): Float {
+		var f = Config.cfg.getDouble("Settings.CannabisCrop.GrowthRate").toFloat()
 		val currentSeason = world.seasonManager.currentSeason ?: return f
+
+		val waterCoords = arrayOf(
+			intArrayOf(-1, 0),
+			intArrayOf(1, 0),
+			intArrayOf(0, -1),
+			intArrayOf(0, 1)
+		)
+
+		val waterBlocks = arrayOf(
+			Block.fluidWaterStill.id,
+			Block.fluidWaterFlowing.id
+		)
+
+		waterCoords.find {
+			waterBlocks.contains(world.getBlockId(x + it[0], y - 1, z + it[1]))
+		}?.run {
+			f *= 1.5f
+		}
 
 		val growthFactor = when (currentSeason) {
 			is SeasonSummer -> 1.0F
@@ -50,15 +69,16 @@ class CannabisBottom(key: String, id: Int): BlockCrops(key, id) {
 	}
 
 	override fun updateTick(world: World, x: Int, y: Int, z: Int, rand: Random) {
-		val growthRate = getGrowthRate(world)
+		val growthRate = getGrowthRate(world, x, y, z)
 		val blockAbove = world.getBlockId(x, y + 1, z)
 		val meta = world.getBlockMetadata(x, y, z)
-		val canGrow = blockAbove == 0 || blockAbove == cannabisTopID && world.getBlockLightValue(x, y + 1, z) >= 9
+		val validTopBlocks = arrayOf(0, cannabisTopID)
+		val canGrow = validTopBlocks.contains(blockAbove) && world.getBlockLightValue(x, y + 1, z) >= 9
 
+		if (meta == 0) setBlockBounds(0.3125f, 0.0f, 0.3125f, 0.6875f, 0.375f, 0.6875f)
 		if (meta >= 4) return
 		if (!canGrow) return
-
-		if (rand.nextInt((100.0f / growthRate).toInt()) != 0) return
+		if (rand.nextInt((100.0f / growthRate.absoluteValue).toInt()) != 0) return
 
 		world.setBlockAndMetadataWithNotify(x, y, z, id, meta + 1)
 		world.setBlockAndMetadataWithNotify(x, y + 1, z, cannabisTopID, meta)
@@ -80,8 +100,7 @@ class CannabisBottom(key: String, id: Int): BlockCrops(key, id) {
 		return
 	}
 
-	override fun getBlockTextureFromSideAndMetadata(side: Side, meta: Int): Int
-		= textureByStage[if (meta in 0..4) meta else 4]
+	override fun getBlockTextureFromSideAndMetadata(side: Side, meta: Int): Int = textureByStage[meta]
 
 	override fun getBreakResult(
 		world: World,

@@ -15,7 +15,7 @@ import java.util.*
 class CannabisTop(key: String, id: Int): BlockCrops(key, id) {
 	private val modID = BetterWithWeed.MOD_ID
 	private val stages = (0..3).map {
-		TextureHelper.getOrCreateBlockTexture(modID, "cannabis_stage${it}_top.png")
+		TextureHelper.getOrCreateBlockTexture(modID, "cannabis_top/stage${it}.png")
 	}
 	private val textureByStage = stages.map {
 		texCoordToIndex(it[0], it[1])
