@@ -31,7 +31,8 @@ class CannabisBottom(key: String, id: Int): BlockCrops(key, id) {
 
 	init {
 		setTickOnLoad(true)
-		setBlockBounds(0.3125f, 0.0f, 0.3125f, 0.6875f, 1.0f, 0.6875f)
+		setBlockBounds(0.3125f, 0.0f, 0.3125f, 0.6875f, 0.75f, 0.6875f)
+		//gonna solve this by making the top hitbox extend below for it to fill the gap created by making maxY <1
 	}
 
 	private fun getGrowthRate(world: World, x: Int, y: Int, z: Int): Float {
@@ -75,8 +76,8 @@ class CannabisBottom(key: String, id: Int): BlockCrops(key, id) {
 		val validTopBlocks = arrayOf(0, cannabisTopID)
 		val canGrow = validTopBlocks.contains(blockAbove) && world.getBlockLightValue(x, y + 1, z) >= 9
 
-		if (meta == 0) setBlockBounds(0.3125f, 0.0f, 0.3125f, 0.6875f, 0.375f, 0.6875f)
-		if (meta >= 4) return
+		if (meta == 0) setBlockBounds(0.3125f, 0.0f, 0.3125f, 0.6875f, 0.75f, 0.6875f)
+		if (meta >= 3) return //Removing this causes my game to crash idk
 		if (!canGrow) return
 		if (rand.nextInt((100.0f / growthRate.absoluteValue).toInt()) != 0) return
 
@@ -95,8 +96,8 @@ class CannabisBottom(key: String, id: Int): BlockCrops(key, id) {
 		val canGrow = blockAbove == 0 || blockAbove == cannabisTopID && world.getBlockLightValue(x, y + 1, z) >= 9
 		if (!canGrow) return
 
-		world.setBlockAndMetadataWithNotify(x, y, z, id, 4)
-		world.setBlockAndMetadataWithNotify(x, y, z, cannabisTopID, 3)
+		world.setBlockAndMetadataWithNotify(x, y, z, id, 3) //i changed these each by -1 and didn't notice a change
+		world.setBlockAndMetadataWithNotify(x, y, z, cannabisTopID, 2) //maybe just keep it this way
 		return
 	}
 
@@ -113,7 +114,11 @@ class CannabisBottom(key: String, id: Int): BlockCrops(key, id) {
 	): Array<ItemStack> {
 		return when (dropCause) {
 			EnumDropCause.PICK_BLOCK -> arrayOf(ItemStack(ModItems.cannabisSeeds, 1))
-			else -> arrayOf()
+			else -> {
+				if (meta == 3)
+					arrayOf(ItemStack(ModItems.FreshBud, (2..4).random()))
+				else arrayOf(ItemStack(ModItems.cannabisSeeds, 1))
+			}
 		}
 	}
 }

@@ -23,7 +23,7 @@ class CannabisTop(key: String, id: Int): BlockCrops(key, id) {
 
 	init {
 		setTickOnLoad(true)
-		setBlockBounds(0.3125f, 0.0f, 0.3125f, 0.6875f, 1.0f, 0.6875f)
+		setBlockBounds(0.3125f, -0.25f, 0.3125f, 0.6875f, 0.6f, 0.6875f)
 	}
 
 	override fun updateTick(world: World, x: Int, y: Int, z: Int, rand: Random) {
@@ -53,9 +53,12 @@ class CannabisTop(key: String, id: Int): BlockCrops(key, id) {
 	): Array<ItemStack> {
 		return when (dropCause) {
 			EnumDropCause.PICK_BLOCK -> arrayOf(ItemStack(ModItems.cannabisSeeds, 1))
-			else -> arrayOf(
-				ItemStack(ModItems.cannabisSeeds, if (meta >= 3) (2..4).random() else 1)
-			)
+			else -> {
+				if (meta == 2)
+					arrayOf(ItemStack(ModItems.FreshBud, (2..4).random()))
+				else arrayOf(ItemStack(ModItems.cannabisSeeds, 1))
+
+			}
 		}
 	}
 }
