@@ -22,7 +22,7 @@ import kotlin.math.absoluteValue
 class CannabisBottom(key: String, id: Int): BlockCrops(key, id) {
 	private val modID = BetterWithWeed.MOD_ID
 	private val cannabisTopID = ModBlocks.cannabisTop.id
-	private val stages = (0..4).map {
+	private val stages = (0..3).map {
 		TextureHelper.getOrCreateBlockTexture(modID, "cannabis_bottom/stage${it}.png")
 	}
 	private val textureByStage = stages.map {
