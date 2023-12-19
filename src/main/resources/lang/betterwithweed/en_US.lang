@@ -1,5 +1,12 @@
 item.betterwithweed.crop.cannabis.seeds.name = Cannabis Seeds
 item.betterwithweed.crop.cannabis.seeds.desc = Seeds of the Cannabis plant.
 
+item.betterwithweed.flower.FreshBud.name= Fresh Bud
+item.betterwithweed.flower.FreshBud.desc= Freshly harvested bud, ready for drying.
+
+item.betterwithweed.flower.DriedBud.name= Dried Bud
+item.betterwithweed.flower.DriedBud.desc= Ready to be smoked. Or baked with.
+
 tile.betterwithweed.crop.cannabis.bottom.name = Cannabis Bottom
 tile.betterwithweed.crop.cannabis.top.name = Cannabis Top
+

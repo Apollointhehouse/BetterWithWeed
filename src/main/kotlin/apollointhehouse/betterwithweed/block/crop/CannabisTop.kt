@@ -40,7 +40,7 @@ class CannabisTop(key: String, id: Int): BlockCrops(key, id) {
 	}
 
 	override fun getBlockTextureFromSideAndMetadata(side: Side, meta: Int): Int
-		= textureByStage[if (meta in 0..3) meta else 3]
+		= textureByStage[if (meta in 0..2) meta else 3]
 
 	override fun getBreakResult(
 		world: World,

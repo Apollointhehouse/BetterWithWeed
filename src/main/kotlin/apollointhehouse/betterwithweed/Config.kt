@@ -23,8 +23,8 @@ object Config {
 
 		properties.addCategory("Item IDs") {
 			addEntry("CannabisCropSeeds", 18_400)
-			addEntry("DriedBud", 19)
-			addEntry("FreshBud", 19_1)
+			addEntry("DriedBud", 18_401)
+			addEntry("FreshBud", 18_402)
 		}
 	}
 
