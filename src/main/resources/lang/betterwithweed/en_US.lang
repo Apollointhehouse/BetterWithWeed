@@ -7,6 +7,9 @@ item.betterwithweed.flower.FreshBud.desc= Freshly harvested bud, ready for dryin
 item.betterwithweed.flower.DriedBud.name= Dried Bud
 item.betterwithweed.flower.DriedBud.desc= Ready to be smoked. Or baked with.
 
+item.betterwithweed.flower.Joint.name= Joint
+item.betterwithweed.flower.Joint.desc= Rolled up nicely, no tobacco.
+
 tile.betterwithweed.crop.cannabis.bottom.name = Cannabis Bottom
 tile.betterwithweed.crop.cannabis.top.name = Cannabis Top
 

@@ -25,6 +25,7 @@ object Config {
 			addEntry("CannabisCropSeeds", 18_400)
 			addEntry("DriedBud", 18_401)
 			addEntry("FreshBud", 18_402)
+			addEntry("Joint", 18_403)
 		}
 	}
 
