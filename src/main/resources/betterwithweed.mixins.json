@@ -3,8 +3,7 @@
     "minVersion": "0.8",
     "package": "apollointhehouse.betterwithweed.mixin",
     "compatibilityLevel": "JAVA_8",
-    "mixins": [
-    ],
+    "mixins": ["NaturalSeedObtaining"],
     "injectors": {
         "defaultRequire": 1
   }
