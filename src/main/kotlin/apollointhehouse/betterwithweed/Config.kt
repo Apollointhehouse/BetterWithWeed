@@ -22,7 +22,7 @@ object Config {
 		}
 
 		properties.addCategory("Item IDs") {
-			addEntry("CannabisCropSeeds", 18_400)
+			addEntry("Seeds", 18_400)
 			addEntry("DriedBud", 18_401)
 			addEntry("FreshBud", 18_402)
 			addEntry("Joint", 18_403)
@@ -30,6 +30,7 @@ object Config {
 	}
 
 	private fun Toml.addCategory(name: String, block: Toml.() -> Unit): Toml = this.addCategory(name).apply(block)
+	fun TomlConfigHandler.getSetting(name: String): Double = this.getDouble("Settings.$name")
 	fun TomlConfigHandler.getBlockID(name: String): Int = this.getInt("Block IDs.$name")
 	fun TomlConfigHandler.getItemID(name: String): Int = this.getInt("Item IDs.$name")
 }

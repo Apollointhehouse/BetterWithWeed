@@ -98,7 +98,6 @@ class CannabisBottom(key: String, id: Int): BlockCrops(key, id) {
 
 		world.setBlockAndMetadataWithNotify(x, y, z, id, 3) //i changed these each by -1 and didn't notice a change
 		world.setBlockAndMetadataWithNotify(x, y, z, cannabisTopID, 2) //maybe just keep it this way
-		return
 	}
 
 	override fun getBlockTextureFromSideAndMetadata(side: Side, meta: Int): Int = textureByStage[meta]
@@ -117,7 +116,8 @@ class CannabisBottom(key: String, id: Int): BlockCrops(key, id) {
 			else -> {
 				if (meta == 3)
 					arrayOf(ItemStack(ModItems.FreshBud, (2..4).random()))
-				else arrayOf(ItemStack(ModItems.cannabisSeeds, 1))
+				else
+					arrayOf(ItemStack(ModItems.cannabisSeeds, 1))
 			}
 		}
 	}

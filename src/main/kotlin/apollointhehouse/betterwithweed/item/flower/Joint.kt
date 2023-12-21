@@ -1,3 +1,5 @@
 package apollointhehouse.betterwithweed.item.flower
 
-class Joint()
+import net.minecraft.core.item.Item
+
+class Joint(key: String, id: Int): Item(key, id)

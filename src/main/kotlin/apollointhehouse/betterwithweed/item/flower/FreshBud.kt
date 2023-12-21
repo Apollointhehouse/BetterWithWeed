@@ -1,3 +1,5 @@
 package apollointhehouse.betterwithweed.item.flower
 
-class FreshBud()
+import net.minecraft.core.item.Item
+
+class FreshBud(key: String, id: Int): Item(key, id)

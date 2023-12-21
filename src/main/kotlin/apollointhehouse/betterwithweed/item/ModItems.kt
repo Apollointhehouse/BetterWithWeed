@@ -10,9 +10,9 @@ import turniplabs.halplibe.helper.ItemHelper
 object ModItems {
 	private val cfg = Config.cfg
 
-	val cannabisSeeds: Item = ItemHelper.createItem(
+	@JvmField val cannabisSeeds: Item = ItemHelper.createItem(
 		BetterWithWeed.MOD_ID,
-		CannabisSeeds("crop.cannabis.bottom", cfg.getItemID("CannabisCropSeeds")),
+		CannabisSeeds("crop.cannabis.bottom", cfg.getItemID("Seeds")),
 		"crop.cannabis.seeds",
 		"cannabis_seeds.png"
 	)
